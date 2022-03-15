@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package com.fges.tp_solid.reigns;
+import java.util.ArrayList;
+import java.util.Map;
 
 
 /**
@@ -14,31 +16,21 @@ public class Personnage {
     
     protected String nom;
     protected Genre genre;
+    protected Map<String,Jauge> listeJauge;
     
-    protected Jauge jaugeClerge;
-    protected Jauge jaugePeuple;
-    protected Jauge jaugeArmee;
-    protected Jauge jaugeFinance;
-    
-    public Personnage(String nom, Genre genre){
+    public Personnage(String nom, Genre genre, Map<String,Jauge>  mes_Jauges){
         this.nom = nom;
         this.genre = genre;
-        
-        // initialisation des jauges entre 15 et 35 points
-        jaugeClerge = new Jauge("Clergé",(int) (15 + Math.random() * ( 35 - 15 )));
-        jaugePeuple = new Jauge("Peuple",(int) (15 + Math.random() * ( 35 - 15 )));
-        jaugeArmee = new Jauge("Armée",(int) (15 + Math.random() * ( 35 - 15 )));
-        jaugeFinance = new Jauge("Finance",(int) (15 + Math.random() * ( 35 - 15 )));
+        this.listeJauge = mes_Jauges;
     }
     
     /**
      * Affiche les jauges dans la console
      */
     public void AfficheJauges(){
-        afficheJauge(jaugeClerge);
-        afficheJauge(jaugePeuple);
-        afficheJauge(jaugeArmee);
-        afficheJauge(jaugeFinance);
+        for (Map.Entry<String,Jauge> jauge : listeJauge.entrySet()) {
+            afficheJauge(jauge.getValue());
+        }
         System.out.flush();
     }
     
@@ -47,18 +39,12 @@ public class Personnage {
      * @return 
      */
     public boolean finDuJeu(){
-        if(jaugeClerge.getValeur()<=0
-        || jaugeClerge.getValeur()>=50
-        || jaugePeuple.getValeur()<=0
-        || jaugePeuple.getValeur()>=50
-        || jaugeArmee.getValeur()<=0
-        || jaugeArmee.getValeur()>=50
-        || jaugeFinance.getValeur()<=0
-        || jaugeFinance.getValeur()>=50){
-            return true;
-        }else{
-            return false;
+        for (Map.Entry<String,Jauge> jauge : listeJauge.entrySet()) {
+            if(jauge.getValue().getValeur()<= 0 || jauge.getValue().getValeur() >=50){
+                return true;
+            }
         }
+        return false;
     }
     
     /**
@@ -96,36 +82,12 @@ public class Personnage {
         this.genre = genre;
     }
 
-    public Jauge getJaugeClerge() {
-        return jaugeClerge;
+    public void setJauge(Map<String,Jauge> jauge){
+        this.listeJauge = jauge;
     }
 
-    public void setJaugeClerge(Jauge jaugeClerge) {
-        this.jaugeClerge = jaugeClerge;
-    }
-
-    public Jauge getJaugePeuple() {
-        return jaugePeuple;
-    }
-
-    public void setJaugePeuple(Jauge jaugePeuple) {
-        this.jaugePeuple = jaugePeuple;
-    }
-
-    public Jauge getJaugeArmee() {
-        return jaugeArmee;
-    }
-
-    public void setJaugeArmee(Jauge jaugeArmee) {
-        this.jaugeArmee = jaugeArmee;
-    }
-
-    public Jauge getJaugeFinance() {
-        return jaugeFinance;
-    }
-
-    public void setJaugeFinance(Jauge jaugeFinance) {
-        this.jaugeFinance = jaugeFinance;
+    public Map<String,Jauge> getJauge(){
+        return this.listeJauge;
     }
     
 }

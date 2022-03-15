@@ -8,8 +8,9 @@ package com.fges.tp_solid.reigns;
 import static com.fges.tp_solid.reigns.Genre.REINE;
 import static com.fges.tp_solid.reigns.Genre.ROI;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
-
 
 /**
  *
@@ -19,6 +20,7 @@ public class Jeu {
     
     private static Personnage personnage;
     private static ArrayList<Question> questions;
+    private static Map<String,Jauge> ma_lisateJauges;
     
     public static void main(String args[]){
         
@@ -88,7 +90,18 @@ public class Jeu {
             roiReine = REINE;
         }
         
-        Jeu.personnage = new Personnage(nom,roiReine);
+        // initialisation des jauges entre 15 et 35 points
+        ma_lisateJauges = new HashMap();
+        Jauge jaugeClerge = new Jauge("Clergé",(int) (15 + Math.random() * ( 35 - 15 )));
+        ma_lisateJauges.put("clerge", jaugeClerge);
+        Jauge jaugePeuple = new Jauge("Peuple",(int) (15 + Math.random() * ( 35 - 15 )));
+        ma_lisateJauges.put("peuple",jaugePeuple);
+        Jauge jaugeArmee = new Jauge("Armée",(int) (15 + Math.random() * ( 35 - 15 )));
+        ma_lisateJauges.put("armee",jaugeArmee);
+        Jauge jaugeFinance = new Jauge("Finance",(int) (15 + Math.random() * ( 35 - 15 )));
+        ma_lisateJauges.put("finance",jaugeFinance);
+        
+        Jeu.personnage = new Personnage(nom,roiReine, ma_lisateJauges);
     }
     
     private static void initBanqueQuestions(){

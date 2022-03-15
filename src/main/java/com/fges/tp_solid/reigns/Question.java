@@ -73,6 +73,7 @@ public class Question {
     private void appliqueEffets(Map<TypeJauge,Integer> effets, 
                                 Personnage personnage){
         for(Entry<TypeJauge,Integer> effet : effets.entrySet()){
+
             switch(effet.getKey()){
                     case ARMEE:
                         personnage.getJaugeArmee().setValeur(
