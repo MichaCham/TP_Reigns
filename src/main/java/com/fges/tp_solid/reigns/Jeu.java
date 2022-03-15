@@ -72,7 +72,6 @@ public class Jeu {
         }else{
             question.appliqueEffetsDroite(personnage);
         }
-        scanner.close();
     }
     
     
@@ -103,7 +102,6 @@ public class Jeu {
         ma_lisateJauges.put("finance",jaugeFinance);
         
         Jeu.personnage = new Personnage(nom,roiReine, ma_lisateJauges);
-        scanner.close();
 
     }
     
