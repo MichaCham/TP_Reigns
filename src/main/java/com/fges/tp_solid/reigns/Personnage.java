@@ -15,9 +15,9 @@ public class Personnage {
     
     protected String nom;
     protected Genre genre;
-    protected Map<String,Jauge> listeJauge;
+    protected Map<TypeJauge,Jauge> listeJauge;
     
-    public Personnage(String nom, Genre genre, Map<String,Jauge>  mes_Jauges){
+    public Personnage(String nom, Genre genre, Map<TypeJauge,Jauge>  mes_Jauges){
         this.nom = nom;
         this.genre = genre;
         this.listeJauge = mes_Jauges;
@@ -27,7 +27,7 @@ public class Personnage {
      * Affiche les jauges dans la console
      */
     public void AfficheJauges(){
-        for (Map.Entry<String,Jauge> jauge : listeJauge.entrySet()) {
+        for (Map.Entry<TypeJauge,Jauge> jauge : listeJauge.entrySet()) {
             afficheJauge(jauge.getValue());
         }
         System.out.flush();
@@ -38,7 +38,7 @@ public class Personnage {
      * @return 
      */
     public boolean finDuJeu(){
-        for (Map.Entry<String,Jauge> jauge : listeJauge.entrySet()) {
+        for (Map.Entry<TypeJauge,Jauge> jauge : listeJauge.entrySet()) {
             if(jauge.getValue().getValeur()<= 0 || jauge.getValue().getValeur() >=50){
                 return true;
             }
@@ -81,11 +81,11 @@ public class Personnage {
         this.genre = genre;
     }
 
-    public void setJauge(Map<String,Jauge> jauge){
+    public void setJauge(Map<TypeJauge,Jauge> jauge){
         this.listeJauge = jauge;
     }
 
-    public Map<String,Jauge> getJauge(){
+    public Map<TypeJauge,Jauge> getJauge(){
         return this.listeJauge;
     }
     
