@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package com.fges.tp_solid.reigns;
-import java.util.ArrayList;
 import java.util.Map;
 
 

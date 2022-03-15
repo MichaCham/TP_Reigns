@@ -72,6 +72,7 @@ public class Jeu {
         }else{
             question.appliqueEffetsDroite(personnage);
         }
+        scanner.close();
     }
     
     
@@ -91,7 +92,7 @@ public class Jeu {
         }
         
         // initialisation des jauges entre 15 et 35 points
-        ma_lisateJauges = new HashMap();
+        ma_lisateJauges = new HashMap<String,Jauge>();
         Jauge jaugeClerge = new Jauge("Clergé",(int) (15 + Math.random() * ( 35 - 15 )));
         ma_lisateJauges.put("clerge", jaugeClerge);
         Jauge jaugePeuple = new Jauge("Peuple",(int) (15 + Math.random() * ( 35 - 15 )));
@@ -102,6 +103,8 @@ public class Jeu {
         ma_lisateJauges.put("finance",jaugeFinance);
         
         Jeu.personnage = new Personnage(nom,roiReine, ma_lisateJauges);
+        scanner.close();
+
     }
     
     private static void initBanqueQuestions(){
