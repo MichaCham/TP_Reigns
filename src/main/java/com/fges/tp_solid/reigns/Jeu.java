@@ -7,7 +7,6 @@ package com.fges.tp_solid.reigns;
 
 import static com.fges.tp_solid.reigns.Genre.REINE;
 import static com.fges.tp_solid.reigns.Genre.ROI;
-import com.fges.tp_solid.reigns.TypeJauge;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,20 +19,17 @@ import java.util.Scanner;
 public class Jeu {
     
     private static Personnage personnage;
-    private static ArrayList<Question> questions;
-    private static Map<TypeJauge,Jauge> ma_lisateJauges;
+    private static BanqueDeQuestion questions;
+    private static Map<TypeJauge,Jauge> ma_listeJauges;
     
     public static void main(String args[]){
         
         // début du jeu 
-        System.out.println("Bienvenue sur Reigns");
-        
-        initBanqueQuestions();
-        
+        System.out.println("Bienvenue sur Reigns");        
         System.out.println("Création du personnage...");
         
         initPersonnage();
-        
+        initBanqueQuestions();
         System.out.println(personnage.getGenre().longRegne()
                 +" "+personnage.getNom());
         
@@ -88,77 +84,27 @@ public class Jeu {
         }
         
         // initialisation des jauges entre 15 et 35 points
-        ma_lisateJauges = new HashMap<TypeJauge,Jauge>();
+        ma_listeJauges = new HashMap<TypeJauge,Jauge>();
         Jauge jaugeClerge = new Jauge("Clergé",(int) (15 + Math.random() * ( 35 - 15 )));
-        ma_lisateJauges.put(TypeJauge.CLERGE, jaugeClerge);
+        ma_listeJauges.put(TypeJauge.CLERGE, jaugeClerge);
         Jauge jaugePeuple = new Jauge("Peuple",(int) (15 + Math.random() * ( 35 - 15 )));
-        ma_lisateJauges.put(TypeJauge.PEUPLE,jaugePeuple);
+        ma_listeJauges.put(TypeJauge.PEUPLE,jaugePeuple);
         Jauge jaugeArmee = new Jauge("Armée",(int) (15 + Math.random() * ( 35 - 15 )));
-        ma_lisateJauges.put(TypeJauge.ARMEE,jaugeArmee);
+        ma_listeJauges.put(TypeJauge.ARMEE,jaugeArmee);
         Jauge jaugeFinance = new Jauge("Finance",(int) (15 + Math.random() * ( 35 - 15 )));
-        ma_lisateJauges.put(TypeJauge.FINANCE,jaugeFinance);
-        
-        Jeu.personnage = new Personnage(nom,roiReine, ma_lisateJauges);
+        ma_listeJauges.put(TypeJauge.FINANCE,jaugeFinance);
+        System.out.println(ma_listeJauges);
+        Jeu.personnage = new Personnage(nom,roiReine, ma_listeJauges);
 
     }
     
     private static void initBanqueQuestions(){
-        questions = new ArrayList<>();
-        Question question1 = new Question(
-                "Main du roi",
-                "Le peuple souhaite libérer les prisonniers"/* ,
-                "Oui",
-                "Non" */);
-        question1.effets.setEffetGauche("Oui");
-        question1.effets.setEffetDroite("Non");
-        question1.effets.ajouterEffetJaugeDroite();
-        /* question1.ajouteEffetGauche(TypeJauge.ARMEE, -5);
-        question1.ajouteEffetGauche(TypeJauge.PEUPLE, +5);
-        question1.ajouteEffetDroite(TypeJauge.PEUPLE, -7); */
-        questions.add(question1);
-        Question question2 = new Question(
-                "Paysan",
-                "Il n'y a plus rien à manger"/* ,
-                "Importer de la nourriture",
-                "Ne rien faire" */);
-        question2.ajouteEffetGauche(TypeJauge.FINANCE,-5);
-        question2.ajouteEffetGauche(TypeJauge.PEUPLE, +5);
-        question2.ajouteEffetDroite(TypeJauge.PEUPLE, -5);
-        questions.add(question2);
-        Question question3 = new Question(
-                "Prêtre",
-                "Les dieux sont en colère"/* ,
-                "Faire un sacrifice",
-                "Ne rien faire" */);
-        question3.ajouteEffetGauche(TypeJauge.CLERGE, +5);
-        question3.ajouteEffetGauche(TypeJauge.PEUPLE, -3);
-        question3.ajouteEffetDroite(TypeJauge.CLERGE, -5);
-        questions.add(question3);
-        Question question4 = new Question(
-                "Main du roi",
-                "Le roi Baratheon rassemble son armée"/* ,
-                "Le soutenir",
-                "Rester neutre" */);
-        question4.ajouteEffetGauche(TypeJauge.ARMEE, +3);
-        question4.ajouteEffetGauche(TypeJauge.FINANCE, -3);
-        question4.ajouteEffetGauche(TypeJauge.CLERGE, -3);
-        question4.ajouteEffetDroite(TypeJauge.PEUPLE, +3);
-        questions.add(question4);
-        Question question5 = new Question(
-                    "Paysan",
-                    "Abondance de récoltes cette année"/* ,
-                    "Taxer énormément",
-                    "Taxer un tout petit peu" */);
-        question5.ajouteEffetGauche(TypeJauge.FINANCE, +10);
-        question5.ajouteEffetGauche(TypeJauge.PEUPLE, -5);
-        question5.ajouteEffetDroite(TypeJauge.FINANCE, +1);
-        question5.ajouteEffetDroite(TypeJauge.PEUPLE, -3);
-        questions.add(question5);
+        questions = new BanqueDeQuestion(ma_listeJauges);
     }
     
     private static Question getQuestionAleatoire(){
-        int numQuestion = (int) (Math.random()*questions.size());
-        return questions.get(numQuestion);
+        int numQuestion = (int) (Math.random()*questions.getBanqueDeQuestions().size());
+        return questions.getBanqueDeQuestions().get(numQuestion);
     }
     
     

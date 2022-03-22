@@ -5,8 +5,7 @@
  */
 package com.fges.tp_solid.reigns;
 
-import com.LesEffets;
-
+import java.util.Map;
 
 /**
  *
@@ -20,9 +19,13 @@ public class Question {
     protected LesEffets effets;
     
     public Question(String nomPersonnage, 
-                    String question){
+                    String question,
+                    String effetGauche,
+                    String effetDroite,
+                    Map<TypeJauge,Jauge>  jauge){
         this.nomPersonnage = nomPersonnage;
         this.question = question;
+        this.effets = new LesEffets(effetGauche, effetDroite, jauge);
     }
     
     public void afficheQuestion(){

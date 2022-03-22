@@ -52,7 +52,7 @@ public class Personnage {
     private void afficheJauge(Jauge jauge){
         String resultat = "[";
         // valeur : ####
-        for(int i=0;i<jauge.getValeur();i++){
+        for(int i=0;i<jauge.getValeur() || i>50;i++){
             resultat += "#";
         }
         // on complète avec ____
@@ -61,6 +61,7 @@ public class Personnage {
         }
         resultat += "] ";
         // affichage du nom
+        resultat += jauge.valeur + "/50 ";
         resultat += jauge.getNom();
         System.out.println(resultat);
     }

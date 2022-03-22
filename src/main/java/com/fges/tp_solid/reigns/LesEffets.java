@@ -1,11 +1,8 @@
-package com;
+package com.fges.tp_solid.reigns;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.fges.tp_solid.reigns.Effet;
-import com.fges.tp_solid.reigns.Jauge;
-import com.fges.tp_solid.reigns.TypeJauge;
 
 public class LesEffets {
     protected ArrayList<Effet> effetJaugeGauche;
@@ -33,14 +30,18 @@ public class LesEffets {
     }
 
     public void appliquerLesEffets(String select){
-        if(select == "D"){
+        if(select.equals("D")){
+            System.out.println("D");
             appliquerEffetDroite();
         }else{
+            System.out.println("G");
             appliquerEffetGauche();
         }
     }
 
     private void appliquerEffetGauche(){
+        System.out.println("GAUCHE");
+        System.out.println(this.effetJaugeGauche);
         for (Effet effet : this.effetJaugeGauche) {
             switch (effet.getLaJauge()) {
                 case ARMEE:
@@ -60,6 +61,8 @@ public class LesEffets {
     }
 
     private void appliquerEffetDroite(){
+        System.out.println("DROITE");
+        System.out.println(this.effetJaugeDroite);
         for (Effet effet : this.effetJaugeDroite) {
             switch (effet.getLaJauge()) {
                 case ARMEE:
@@ -79,7 +82,9 @@ public class LesEffets {
     }
 
     public void afficherEffets(){
-        System.out.println("[G: "+ this.effetGauche+",D: "+ this.effetDroite + "]\n");
+        System.out.println("[G: "+ this.effetGauche+",D: "+ this.effetDroite + "]");
+        afficherEffetsGauche();
+        afficherEffetsDroite();
         
     }
 
@@ -88,7 +93,6 @@ public class LesEffets {
         for (Effet effet : this.effetJaugeGauche) {
             effet.afficheEffets();
         }
-        System.out.println("\n");
     }
 
     public void afficherEffetsDroite(){
@@ -96,7 +100,6 @@ public class LesEffets {
         for (Effet effet : this.effetJaugeDroite) {
             effet.afficheEffets();
         }
-        System.out.println("\n");
     }
     
 

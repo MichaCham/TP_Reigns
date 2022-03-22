@@ -10,7 +10,7 @@ public class Effet {
     }
 
     public void appliquerEffet(Jauge jauge){
-        jauge.valeur += this.leNombre;
+        jauge.setValeur(jauge.valeur + this.leNombre);
     }
 
     public void afficheEffets(){
