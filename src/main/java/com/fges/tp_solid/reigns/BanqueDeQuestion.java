@@ -5,8 +5,10 @@ import java.util.Map;
 
 public class BanqueDeQuestion {
     ArrayList<Question> banqueDeQuestions;
+    Personnage personnage;
     
-    public BanqueDeQuestion(Map<TypeJauge,Jauge> ma_listeJauges){
+    public BanqueDeQuestion(Map<TypeJauge,Jauge> ma_listeJauges, Personnage personnage){
+        this.personnage = personnage;
         banqueDeQuestions = new ArrayList<>();
         Question question1 = new Question(
                 "Main du roi",
@@ -60,6 +62,34 @@ public class BanqueDeQuestion {
         question5.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.FINANCE, +1));
         question5.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.PEUPLE, -3));
         banqueDeQuestions.add(question5);
+
+        Question question6 = new Question(
+                    "Main du Roi",
+                    "Les caisses sont vides...",
+                    "Augmenter les taxes",
+                    "Emprunter",
+                    ma_listeJauges);
+        question6.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.FINANCE, +10));
+        question6.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.PEUPLE, -5));
+        question6.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.FINANCE, +1));
+        question6.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.PEUPLE, -3));
+        question6.conditions.add(new Condition(TypeJauge.FINANCE, "<", 10));
+        banqueDeQuestions.add(question6);
+        Question question7 = new Question(
+                    "Prêtre",
+                    "J'aimerai qu'on nous considère en tant que tel",
+                    "Construire un monastère",
+                    "Ecouter sans rien faire",
+                    ma_listeJauges);
+        question7.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.FINANCE, +10));
+        question7.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.PEUPLE, -5));
+        question7.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.FINANCE, +1));
+        question7.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.PEUPLE, -3));
+        question7.conditions.add(new Condition(TypeJauge.CLERGE, "<", 10));
+        question7.conditions.add(new Condition(TypeJauge.FINANCE, ">", 30));
+        banqueDeQuestions.add(question7);
+
+
     }
 
     public ArrayList<Question> getBanqueDeQuestions() {
@@ -68,6 +98,21 @@ public class BanqueDeQuestion {
 
     public void setBanqueDeQuestions(ArrayList<Question> banqueDeQuestions) {
         this.banqueDeQuestions = banqueDeQuestions;
+    }
+
+    public Question getQuestionAleatoire(){
+        int numQuestion = (int) (Math.random()* this.banqueDeQuestions.size());
+        boolean boolCondition = false;
+        if(this.banqueDeQuestions.get(numQuestion).conditions.size() >= 1){
+            for (Condition condition : this.banqueDeQuestions.get(numQuestion).conditions) {
+                boolCondition = condition.verifCondition(this.personnage.getJauge().get(condition.getTypeJauge()));
+
+                if(boolCondition == false){
+                    return getQuestionAleatoire();
+                }
+            }
+        }
+        return this.banqueDeQuestions.get(numQuestion);
     }
 
 

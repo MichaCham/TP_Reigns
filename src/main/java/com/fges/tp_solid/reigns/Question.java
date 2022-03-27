@@ -5,6 +5,7 @@
  */
 package com.fges.tp_solid.reigns;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -17,6 +18,7 @@ public class Question {
     protected String nomPersonnage;
     protected String question;
     protected LesEffets effets;
+    protected ArrayList<Condition> conditions;
     
     public Question(String nomPersonnage, 
                     String question,
@@ -26,6 +28,7 @@ public class Question {
         this.nomPersonnage = nomPersonnage;
         this.question = question;
         this.effets = new LesEffets(effetGauche, effetDroite, jauge);
+        this.conditions = new ArrayList<Condition>();
     }
     
     public void afficheQuestion(){

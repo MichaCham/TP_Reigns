@@ -39,7 +39,7 @@ public class Jeu {
         int nbTours = 0;
         while(!personnage.finDuJeu()){
             nbTours++;
-            Question question = getQuestionAleatoire();
+            Question question = questions.getQuestionAleatoire();
             reponseQuestion(question);
             personnage.AfficheJauges();
         }
@@ -99,12 +99,7 @@ public class Jeu {
     }
     
     private static void initBanqueQuestions(){
-        questions = new BanqueDeQuestion(ma_listeJauges);
-    }
-    
-    private static Question getQuestionAleatoire(){
-        int numQuestion = (int) (Math.random()*questions.getBanqueDeQuestions().size());
-        return questions.getBanqueDeQuestions().get(numQuestion);
+        questions = new BanqueDeQuestion(ma_listeJauges, personnage);
     }
     
     
