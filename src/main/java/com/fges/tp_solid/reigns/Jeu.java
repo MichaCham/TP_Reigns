@@ -21,13 +21,15 @@ public class Jeu {
     private static Personnage personnage;
     private static BanqueDeQuestion questions;
     private static Map<TypeJauge,Jauge> ma_listeJauges;
+    private static JeuGOT jeuGOT;
     
     public static void main(String args[]){
         
         // début du jeu 
-        System.out.println("Bienvenue sur Reigns");        
+        System.out.println("Bienvenue sur Reigns"); 
+               
         System.out.println("Création du personnage...");
-        
+        initGoat();
         initPersonnage();
         initBanqueQuestions();
         System.out.println(personnage.getGenre().longRegne()
@@ -39,6 +41,7 @@ public class Jeu {
         int nbTours = 0;
         while(!personnage.finDuJeu()){
             nbTours++;
+            jeuGOT.affichageHiver(nbTours);
             Question question = questions.getQuestionAleatoire();
             reponseQuestion(question);
             personnage.AfficheJauges();
@@ -99,7 +102,25 @@ public class Jeu {
     }
     
     private static void initBanqueQuestions(){
-        questions = new BanqueDeQuestion(ma_listeJauges, personnage);
+        questions = new BanqueDeQuestion(ma_listeJauges, personnage, jeuGOT.hiver);
+    }
+
+    private static void initGoat(){
+        System.out.println("Voulez-vous jouer à la version GOT");
+        Scanner scanner = new Scanner(System.in);
+        String reponse = "";
+        while(!reponse.equals("1") && !reponse.equals("2")){
+            System.out.println("1 - OUI, 2- NON");
+            System.out.flush();
+            reponse = scanner.nextLine();
+        }
+
+        if(reponse.equals("1")){
+            jeuGOT = new JeuGOT(true);
+        }
+        else{
+            jeuGOT = new JeuGOT(false);
+        }
     }
     
     

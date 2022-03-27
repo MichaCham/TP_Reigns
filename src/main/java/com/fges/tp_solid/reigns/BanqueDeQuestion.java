@@ -7,7 +7,7 @@ public class BanqueDeQuestion {
     ArrayList<Question> banqueDeQuestions;
     Personnage personnage;
     
-    public BanqueDeQuestion(Map<TypeJauge,Jauge> ma_listeJauges, Personnage personnage){
+    public BanqueDeQuestion(Map<TypeJauge,Jauge> ma_listeJauges, Personnage personnage, boolean GOT){
         this.personnage = personnage;
         banqueDeQuestions = new ArrayList<>();
         Question question1 = new Question(
@@ -16,9 +16,9 @@ public class BanqueDeQuestion {
                 "Oui",
                 "Non",
                 ma_listeJauges);
-        question1.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.PEUPLE, -7));
-        question1.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.ARMEE, -5));
-        question1.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.PEUPLE, +5));
+        question1.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.PEUPLE, -7, GOT));
+        question1.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.ARMEE, -5, GOT));
+        question1.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.PEUPLE, +5, GOT));
         banqueDeQuestions.add(question1);
         Question question2 = new Question(
                 "Paysan",
@@ -26,9 +26,9 @@ public class BanqueDeQuestion {
                 "Importer de la nourriture",
                 "Ne rien faire",
                 ma_listeJauges);
-        question2.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.FINANCE,-5));
-        question2.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.PEUPLE, +5));
-        question2.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.PEUPLE, -5));
+        question2.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.FINANCE,-5, GOT));
+        question2.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.PEUPLE, +5, GOT));
+        question2.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.PEUPLE, -5, GOT));
         banqueDeQuestions.add(question2);
         Question question3 = new Question(
                 "Prêtre",
@@ -36,9 +36,9 @@ public class BanqueDeQuestion {
                 "Faire un sacrifice",
                 "Ne rien faire",
                 ma_listeJauges);
-        question3.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.CLERGE, +5));
-        question3.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.PEUPLE, -3));
-        question3.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.CLERGE, -5));
+        question3.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.CLERGE, +5, GOT));
+        question3.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.PEUPLE, -3, GOT));
+        question3.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.CLERGE, -5, GOT));
         banqueDeQuestions.add(question3);
         Question question4 = new Question(
                 "Main du roi",
@@ -46,10 +46,10 @@ public class BanqueDeQuestion {
                 "Le soutenir",
                 "Rester neutre",
                 ma_listeJauges);
-        question4.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.ARMEE, +3));
-        question4.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.FINANCE, -3));
-        question4.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.CLERGE, -3));
-        question4.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.PEUPLE, +3));
+        question4.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.ARMEE, +3, GOT));
+        question4.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.FINANCE, -3, GOT));
+        question4.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.CLERGE, -3, GOT));
+        question4.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.PEUPLE, +3, GOT));
         banqueDeQuestions.add(question4);
         Question question5 = new Question(
                     "Paysan",
@@ -57,10 +57,10 @@ public class BanqueDeQuestion {
                     "Taxer énormément",
                     "Taxer un tout petit peu",
                     ma_listeJauges);
-        question5.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.FINANCE, +10));
-        question5.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.PEUPLE, -5));
-        question5.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.FINANCE, +1));
-        question5.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.PEUPLE, -3));
+        question5.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.FINANCE, +10, GOT));
+        question5.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.PEUPLE, -5, GOT));
+        question5.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.FINANCE, +1, GOT));
+        question5.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.PEUPLE, -3, GOT));
         banqueDeQuestions.add(question5);
 
         Question question6 = new Question(
@@ -69,10 +69,10 @@ public class BanqueDeQuestion {
                     "Augmenter les taxes",
                     "Emprunter",
                     ma_listeJauges);
-        question6.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.FINANCE, +10));
-        question6.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.PEUPLE, -5));
-        question6.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.FINANCE, +1));
-        question6.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.PEUPLE, -3));
+        question6.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.FINANCE, +10, GOT));
+        question6.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.PEUPLE, -5, GOT));
+        question6.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.FINANCE, +1, GOT));
+        question6.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.PEUPLE, -3, GOT));
         question6.conditions.add(new Condition(TypeJauge.FINANCE, "<", 10));
         banqueDeQuestions.add(question6);
         Question question7 = new Question(
@@ -81,10 +81,10 @@ public class BanqueDeQuestion {
                     "Construire un monastère",
                     "Ecouter sans rien faire",
                     ma_listeJauges);
-        question7.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.FINANCE, +10));
-        question7.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.PEUPLE, -5));
-        question7.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.FINANCE, +1));
-        question7.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.PEUPLE, -3));
+        question7.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.FINANCE, +10, GOT));
+        question7.effets.ajouterEffetJaugeGauche(new Effet(TypeJauge.PEUPLE, -5, GOT));
+        question7.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.FINANCE, +1, GOT));
+        question7.effets.ajouterEffetJaugeDroite(new Effet(TypeJauge.PEUPLE, -3, GOT));
         question7.conditions.add(new Condition(TypeJauge.CLERGE, "<", 10));
         question7.conditions.add(new Condition(TypeJauge.FINANCE, ">", 30));
         banqueDeQuestions.add(question7);
@@ -114,6 +114,5 @@ public class BanqueDeQuestion {
         }
         return this.banqueDeQuestions.get(numQuestion);
     }
-
 
 }
